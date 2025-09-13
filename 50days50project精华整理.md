@@ -56,17 +56,41 @@
   });
   ```
 
-  
+
+
 
 ### **Day2 Progress Steps 步骤器**
 
-- 变量
+- `:root`与变量：
 
+  1. `:root`等价于html文档的根元素，即`<html>`。一般用于存放全局变量，也成为全局变量区域
 
+     ```css
+     :root{
+       --line-border-fill: #3498db;
+       --line-border-empty: #e0e0e0;
+     }
+     ```
+
+  2. **CSS变量（自定义属性）**
+
+     变量名称必须以`--`开头，例如`--main-color`；`var`是取值函数，用来调用变量
+
+     ```css
+     .button {
+       /*第二个参数为回退值，如果变量不存在就用第二个值：var(--变量名, [可选的默认值])*/
+       color: var(--main-color, blue);
+       border-color: var(--main-color);
+     }
+     ```
+
+     变量不仅可以放在`:root`作为全局变量，还可以放在局部选择器内，只是作用域只在该元素及其所有子元素
 
 
 
 ### **Day3 Rotating Navigation Animation 旋转菜单**
+
+
 
 
 
