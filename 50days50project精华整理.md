@@ -24,7 +24,7 @@
 
 - 父容器flex布局，子项设置`flex: 1;`，**可以均分空间（设置不同值可以按比例分配）**
 
-  > 简而言之，子组件全部`flex: 1;`就是均分，部分设置更大值可以占据更多比例，用于实现拓展效果
+  > **简而言之，子组件全部`flex: 1;`就是均分，部分设置更大值可以占据更多比例，用于实现拓展卡片效果**
 
   `flex: 1`等价于下面三行：
   
@@ -49,7 +49,7 @@
   panels.forEach(item => {
     // 全部添加点击事件
     item.addEventListener('click', () => {
-      // 前面得到的panels是NodeList（DO），无法使用数据方法，Array.from转化其为真数组。从而去掉全部active
+      // 前面得到的panels是NodeList（DOM节点集合），无法使用数据方法，Array.from转化其为真数组。从而去掉全部active
       Array.from(item.parentElement.children).forEach(el => el.classList.remove('active'))
       item.classList.add('active')
     });
@@ -60,7 +60,19 @@
 
 ### **Day2 Progress Steps 步骤器**
 
-- 
+- 变量
 
 
+
+
+
+### **Day3 Rotating Navigation Animation 旋转菜单**
+
+
+
+
+
+
+
+### **Day4 Hidden Search Widget 隐藏搜索框**
 
