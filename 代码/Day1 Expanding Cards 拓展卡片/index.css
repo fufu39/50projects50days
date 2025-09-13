@@ -1,5 +1,6 @@
 body{
   display: flex;
+  background-color: #FFCBD1;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -25,12 +26,15 @@ body{
 }
 
 .panel h3{
-  font-size: 24px;
+  font-size: 60px;
   position: absolute;
-  bottom: 20px;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+  transition: opacity 0.7s;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .panel.active{
@@ -39,5 +43,4 @@ body{
 
 .panel.active h3{
   opacity: 1;
-  transition: all 0.3s;
 }

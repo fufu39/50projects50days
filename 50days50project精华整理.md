@@ -49,7 +49,7 @@
   panels.forEach(item => {
     // 全部添加点击事件
     item.addEventListener('click', () => {
-      // 前面得到的panels是NodeList，无法使用数据方法，Array.from转化其为真数组。从而去掉全部active
+      // 前面得到的panels是NodeList（DO），无法使用数据方法，Array.from转化其为真数组。从而去掉全部active
       Array.from(item.parentElement.children).forEach(el => el.classList.remove('active'))
       item.classList.add('active')
     });
@@ -58,7 +58,9 @@
 
   
 
+### **Day2 Progress Steps 步骤器**
 
+- 
 
 
 
