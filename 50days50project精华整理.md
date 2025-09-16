@@ -90,13 +90,24 @@
 
 ### **Day3 Rotating Navigation Animation 旋转菜单**
 
-- rotate
-
-
-
-
+无
 
 
 
 ### **Day4 Hidden Search Widget 隐藏搜索框**
 
+- background: linear-gradient(90deg, #71b7e6, #9b59b6);
+
+  
+
+- .classList.toggle、classList.contains
+
+
+
+### **Day5 Blurry Loading 模糊加载**
+
+
+
+
+
+### **Day6 Scroll Animation 滚动动画**
