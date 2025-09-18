@@ -1,0 +1,21 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.bg{
+  background: url('./image.jpg') no-repeat center center / cover;
+  height: calc(100vh);
+  width: calc(100vw);
+  z-index: -1;
+  filter: blur(0px);
+}
+
+.loading-text{
+  position: absolute;
+  font-size: 50px;
+  color: rgb(192, 29, 29);
+}

@@ -223,7 +223,27 @@
 
 ### **Day5 Blurry Loading 模糊加载**
 
-- 
+- filter
+
+  
+
+- JS逻辑：定时器
+
+  ```js
+  let load = 0;
+  let timer = null;
+  let blurryLoadingHandler = function(){
+      load++;
+      if(load > 99){
+          clearTimeout(timer)
+      }else{
+          timer = setTimeout(blurryLoadingHandler,20);
+      }
+      text.textContent = `页面加载${ load }%`;
+      text.style.opacity = scale(load,0,100,1,0);
+      bg.style.filter = `blur(${scale(load,0,100,20,0)}px)`;
+  }
+  blurryLoadingHandler();
 
 
 
