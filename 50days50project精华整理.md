@@ -275,3 +275,246 @@
 
 
 ### **Day6 Scroll Animation 滚动动画**
+
+- **`box-shadow`属性**
+
+  ```css
+  box-shadow: [inset] 水平偏移 垂直偏移 (模糊半径) (拓展半径) 阴影颜色 [, .....];
+  ```
+
+  1. [inset]为设置内阴影，默认是外阴影
+  2. 水平偏移正值右移、负值左移。垂直偏移正值下移，负值上移
+  3. 模糊半径：越大越模糊，0为无模糊。
+  4. 拓展半径：正值扩大阴影，负值缩小
+  5. 阴影颜色一般用rgba，可以支持透明度
+  6. **此外可以用逗号分隔多个阴影，会顺序渲染，前面覆盖后面的**
+
+  
+
+  例子：
+
+  ```css
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 0, 0, 0.5);
+  ```
+
+  
+
+- **浏览器高度、滚动和元素位置相关API总结**
+
+  - **视口**
+
+    1. `window.innerHeight`
+
+       - 获取浏览器视口高度(单位px)，可用于计算滚动触发线
+
+       - 示例：
+
+         ```js
+         console.log(window.innerHeight) // 假设为 900px
+         const triggerBottom = window.innerHeight * 0.8
+         // triggerBottom = 720px，触发线在视口距离顶部80%位置
+         ```
+         
+         
+  
+    2. `window.innerWidth`
+
+       - 获取浏览器视口宽度，可用于响应式布局
+
+       - 示例：
+
+         ```js
+         console.log(window.innerWidth)
+         if (window.innerWidth < 768) {
+           console.log('移动端布局')
+         }
+         ```
+         
+         
+  
+    3. `window.outerHeight / window.outerWidth`
+
+       获取整个浏览器窗口的高度/宽度（包含工具栏、地址栏等），使用较少。
+
+       
+
+    4. `document.documentElement.clientHeight / clientWidth`
+
+       - 获取 `<html>` 根元素的可见区域宽高。
+       - 对比：相比前面innerHeight、innerWidth，**包括padding，不包括滚动条、边框、margin**
+  
+       
+  
+    5. `document.documentElement.scrollHeight`
+  
+       - 用法：获取 `<html>` 根元素完整高度，可用于判断是否滚动到底部
+  
+       - 示例：
+  
+         ```js
+         console.log(document.documentElement.scrollHeight)
+         if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+           console.log('滚动到底了')
+         }
+  
+    
+  
+  - **元素位置**
+  
+    1. `element.getBoundingClientRect()`
+  
+       - 返回元素相对于视口的矩形对象，可以得到下面属性：
+  
+         > 1. top：元素顶部到视口顶部的距离（可能是负数）
+         > 2. bottom：元素底部到视口顶部的距离
+         > 3. left / right：元素左侧/右侧到视口左侧的距离
+         > 4. width / height：元素尺寸
+  
+       - 示例：
+  
+         ```js
+         const box = document.querySelector('.box')
+         const rect = box.getBoundingClientRect()
+         console.log(rect.top, rect.bottom)
+         // top < window.innerHeight 表示进入视口
+         ```
+  
+         
+  
+    2. `element.offsetTop / offsetLeft`
+  
+       - 获取元素相对最近的定位祖先元素（offsetParent）各个方向的位置。与`getBoundingClientRect`不同，它不随滚动变化
+  
+       - 示例：
+  
+         ```html
+         <div style="position: relative;">
+           <div class="box">Content</div>
+         </div>
+         <script>
+           const box = document.querySelector('.box')
+           console.log(box.offsetTop)
+         </script>
+         ```
+  
+         
+  
+    3. `element.clientWidth / clientHeight`
+  
+       - 获取元素自身内容可见区域尺寸（包含 padding，不含 margin/border/滚动条）
+  
+       - 示例：
+  
+         ```html
+         <div class="box" style="width:200px; padding:10px;">Content</div>
+         <script>
+           const box = document.querySelector('.box')
+           console.log(box.clientWidth)
+         </script>
+         ```
+  
+         
+  
+    4. `element.scrollHeight / scrollWidth`
+  
+       - 获取元素内容的完整高度/宽度（包含溢出隐藏部分）
+  
+       - 对比：相比`element.clientWidth / clientHeight`，这个还包含了隐藏部分尺寸
+  
+         
+  
+    5. `element.scrollTop / scrollLeft`
+  
+       - 获取元素内容顶部/左侧到视口顶部/左侧的滚动距离（已滚动的距离）
+  
+    
+  
+  - **滚动**
+  
+    1. `window.scrollX / window.scrollY`
+  
+       - 用法：表示水平/垂直方向的滚动距离（滚动距离就是已经被卷出去的距离）
+  
+         通常配合 `scrollTo`、`scrollBy` 控制滚动位置
+  
+       
+  
+    2. `window.scrollTo(x, y) / window.scrollTo({ top, left, behavior })`
+  
+       - 滚动到指定位置（behavior默认auto是直接跳转，smooth是平滑滚动）
+  
+       - 示例：
+  
+         ```js
+         // 滚动到(x, y)位置
+         window.scrollTo(x, y)
+         window.scrollTo({
+           top: y, left: x, behavior: "smooth"
+         })
+         // 回到顶部（平滑滚动）
+         window.scrollTo({ top: 0, behavior: 'smooth' })
+  
+    3. `window.scrollBy(x, y)`
+  
+       - 相对当前位置进行滚动
+  
+       - 示例：
+  
+         ```js
+         // 向下滚动100px
+         window.scrollBy(0, 100)
+  
+       
+  
+    4. element.scrollIntoView(options)
+  
+       - 滚动页面，让某元素进入可视区域。
+  
+         options内属性：
+  
+         > 1. behavior：滚动行为
+         >
+         >    `auto`（默认，瞬间跳过去）
+         >
+         >    `smooth`（平滑滚动）
+         >
+         > 2. block：垂直方向对齐方式
+         >
+         >    `start`（顶部对齐，默认）
+         >
+         >    `center`（元素滚到视口中间）
+         >
+         >    `end`（底部对齐）
+         >
+         >    `nearest`（就近对齐）
+         >
+         > 3. inline：水平方向对齐方式
+         >
+         >    （同 block，但针对 x 轴）
+  
+       - 示例：
+  
+         ```js
+         document.querySelector('.box').scrollIntoView({
+           behavior: 'smooth',
+           block: 'center',
+           inline: "center"
+         })
+  
+       
+  
+    5. 事件：
+  
+       `window.addEventListener('scroll', callback)`监听整个页面滚动
+  
+       `element.addEventListener('scroll', callback)`监听特定容器的滚动 (需overflow: auto/scroll)
+  
+
+
+
+### **Day7 Split Landing Page 页面分裂**
+
+- 
+
+
+
