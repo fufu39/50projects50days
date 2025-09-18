@@ -2,12 +2,12 @@ const loadText = document.querySelector('.loading-text')
 const bg = document.querySelector('.bg')
 
 let load = 0
-let count = setInterval(blurring, 30)
+let timer = setInterval(blurring, 30)
 
 function blurring() {
   load++
   if(load > 99){
-    clearInterval(count)
+    clearInterval(timer)
   }
   loadText.innerHTML = `${load}%`
   loadText.style.opacity = scale(load, 100, 0, 0, 1)

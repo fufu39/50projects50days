@@ -223,27 +223,54 @@
 
 ### **Day5 Blurry Loading 模糊加载**
 
-- filter
+- **`filter`属性**
+
+  filter属性用于为元素进行视觉处理（如模糊、亮度调整、色调变化），类似于添加滤镜效果，无需改动原始图像
+
+  常用滤镜函数：
+
+  1. `blur(radius)`：调整模糊效果，模糊程度由半径决定
+
+     ```css
+     filter: blur(5px);
+     ```
+
+  2. `brightness(percentage)`：调整亮度，0%全黑到100%原始亮度，大于100%更亮
+
+     ```css
+     filter: brightness(150%);
+
+  3. `contrast(percentage)`：调整对比度，0%全灰到100%原始对比度，大于100%增强对比度
+
+     ```css
+     filter: contrast(200%);
 
   
 
-- JS逻辑：定时器
+- JS逻辑：通过定时器实现加载效果
 
   ```js
-  let load = 0;
-  let timer = null;
-  let blurryLoadingHandler = function(){
-      load++;
-      if(load > 99){
-          clearTimeout(timer)
-      }else{
-          timer = setTimeout(blurryLoadingHandler,20);
-      }
-      text.textContent = `页面加载${ load }%`;
-      text.style.opacity = scale(load,0,100,1,0);
-      bg.style.filter = `blur(${scale(load,0,100,20,0)}px)`;
+  let load = 0
+  /* 定时器，每30ms调用blurring函数 */
+  let timer = setInterval(blurring, 30)
+  
+  function blurring() {
+    load++
+    if(load > 99){
+      clearInterval(timer)
+    }
+    loadText.innerHTML = `${load}%`
+    /* 透明度和模糊效果变化 */
+    loadText.style.opacity = scale(load, 100, 0, 0, 1)
+    bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`
   }
-  blurryLoadingHandler();
+  ```
+
+  工具函数：将输入值`n`从一个范围`[inMin, inMax]`线性映射到另一个范围`[outerMin, outerMax]`
+
+  ```js
+  const scale = (n,inMin,inMax,outerMin,outerMax) => (n - inMin) * (outerMax - outerMin) / (inMax - inMin) + outerMin;
+  ```
 
 
 
