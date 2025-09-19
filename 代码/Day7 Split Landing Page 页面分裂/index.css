@@ -1,0 +1,141 @@
+:root{
+  --hover-bg-color: #f18ec92f;
+  --hidden-bg-color: rgba(43, 43, 43, 0.8);
+  --left-btn-hover-color: rgba(87, 84, 236, 1);
+  --right-btn-hover-color: rgba(28, 122, 28, 1);
+  --hover-width: 60%;
+  --other-width: 40%;
+  --speed: 1000ms;
+}
+
+body{
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+}
+
+.split{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+}
+
+h1{
+  font-size: 50px;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.btn{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40%;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 22px;
+  padding: 15px 23px;
+  border: 4px solid #fff;
+  font-weight: bold;
+  transition: all 0.35s ease;
+}
+
+.split.left .btn:hover{
+  /* background-color: var(--left-btn-hover-color); */
+  color: red;
+  border-color: red;
+}
+.split.right .btn:hover{
+  /* background-color: var(--right-btn-hover-color); */
+  color: red;
+  border-color: red;
+}
+
+.split.left{
+  left: 0;
+  top: 0;
+  background: url(./pic1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 0px;
+}
+.split.left::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--hidden-bg-color);
+}
+
+.split.right{
+  right: 0;
+  top: 0;
+  background: url(./pic2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center -30px;
+}
+.split.right::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--hidden-bg-color);
+}
+
+.split.left,
+.split.left::before,
+.split.right,
+.split.right::before{
+  transition: all 0.7s ease-in-out;
+}
+
+.hover-left .left{
+  background-position: center;
+  width: var(--hover-width);
+}
+.hover-left .left::before{
+  background-color: var(--hover-bg-color);
+}
+.hover-left .right{
+  background-position: center 0px;
+  width: var(--other-width);
+}
+
+.hover-right .right{
+  background-position: center -230px;
+  width: var(--hover-width);
+}
+.hover-right .right::before{
+  background-color: var(--hover-bg-color);
+}
+.hover-right .left{
+  background-position: center;
+  width: var(--other-width);
+}
+
+@media(max-width: 800px){
+  h1{
+    font-size: 30px;
+    top: 30%;
+  }
+  .btn{
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+}
+
