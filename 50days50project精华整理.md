@@ -514,7 +514,84 @@
 
 ### **Day7 Split Landing Page 页面分裂**
 
-- @media
+- **`@media`响应式布局**
+
+  根据不同的设备特性（屏幕宽度、高度、分辨率、方向等）应用不同的样式，实现设备适配的响应式布局。
+
+  **基本语法：**
+
+  media-type默认是all，screen为屏幕、print为打印机
+
+  condition用来描述设备特性，如min-width最小宽度、max-width最大宽度、orientation: portrait竖屏、orientation: landscape横屏
+
+  ```css
+  @media media-type and (condition) {
+    /* CSS样式 */
+  }
+  ```
+
+  **常见示例：**
+
+  1. 不同宽度
+
+     ```css
+     /* 宽度小于1024px */
+     @media screen and (max-width: 1024px) {
+       body {
+         background: lightgreen;
+       }
+     }
+     /* 宽度小于600px。后面的覆盖前面的 */
+     @media screen and (max-width: 600px) {
+       body {
+         background: lightcoral;
+       }
+     }
+     
+     ```
+
+     ```css
+     /* 宽度在600px和1024px间 */
+     @media screen and (min-width: 600px) and (max-width: 1024px) {
+       .container {
+         font-size: 18px;
+       }
+     }
+
+  2. 打印机
+
+     ```css
+     @media print {
+       body {
+         background: none; /* 打印时去掉背景 */
+         color: black;
+       }
+     }
+
+
+
+### **Day8 Form Wave 输入框波浪效果**
+
+- JS逻辑：文字波浪效果
+
+  innerHTML为label内HTML结构，innerText为该label元素纯文本内容，`.split('')`将文本分割成字符数组，最后map返回一个包含多个`<span>`的数组，每个span内为一个字母。`transition-delay`会让span因延迟不同依次产生动画，形成波浪效果
+
+  ```js
+  label.innerHTML = label.innerText.split('').map((letter, index) => {
+      return `<span style="transition-delay: ${index*50}ms">${letter}</span>`
+  }).join('')
+
+
+
+### **Day9 Sound Board 音板**
+
+
+
+
+
+
+
+### **Day10 Dad Jokes 随机笑话**
 
 
 
