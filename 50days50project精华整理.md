@@ -699,7 +699,42 @@
 
 ### **Day10 Dad Jokes 随机笑话**
 
+- **fetch API**
 
+  - 概念：fetch是浏览器提供的原生API，用于发起网络请求。基于Promise，可以替代传统`XMLHttpRequest`
+
+  - 基本语法：
+
+    ```js
+    fetch(url, options)
+    .then(response => {
+      // response 是 Response 对象
+    })
+    .catch(error => {
+      // 捕获网络错误
+    })
+    ```
+
+    1. options为可选配置对象，可以根据需求添加请求方法，请求头，请求体信息
+
+       ```js
+       fetch('https://api.example.com/login', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+           username: 'user1',
+           password: '123456'
+         })
+       })
+
+    2. 返回值：fetch返回的是一个Promise，需要对响应体进行解析，**用`response.json()`将其解析为JSON对象**
+
+  - 对比：
+
+    1. 相比`XMLHttpRequest`更加简洁，支持链式调用
+    2. 相比`axios`不需要额外安装库，但是axios能自动解析res.data，还能进行拦截器处理
 
 
 
@@ -708,4 +743,6 @@
 
 
 
+
+### **Day12 Faq Collapse 问题面板**
 
