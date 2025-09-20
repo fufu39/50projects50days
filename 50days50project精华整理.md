@@ -585,10 +585,115 @@
 
 ### **Day9 Sound Board 音板**
 
-- const btn = document.createElement('button')
-- document.querySelector('#buttons').appendChild(btn)
+- **相关知识点：操作DOM元素**
 
+  1. **创建元素**
 
+     `const btn = document.createElement('button')`：创建新的HTML元素节点，可用于创建常用标签（如div、p、button等）
+
+     > 此时创建的元素会存在到内存中，不会直接显示到页面上，需要专门插入
+
+     
+
+  2. **设置元素内容与属性**
+
+     - 文本类型
+
+       `element.innerText = '内容'`：设置或获取纯文本（会考虑样式，例如隐藏的文本不读取）
+
+       `element.textContent = '内容'`：设置或获取纯文本（完全不考虑样式）
+
+       `element.innerHTML = '<b>内容</b>'`：设置或获取HTML结构
+
+     - 属性
+
+       `element.setAttribute('属性名', '值')`：设置任意属性
+
+       `element.id = 'xxx'`，`element.className = 'btn'`：直接设置常用属性
+
+       `element.src = 'xx.png'`：设置图片地址
+
+     - 样式
+
+       `element.style.color = 'red'`：直接设置行内样式
+
+       `element.classList.add('className')` / `.remove()` / `.toggle()`：动态修改类名
+
+     
+
+  3. **插入到文档中**
+
+     `parent.appendChild(child)`：添加节点到父元素内的最后一个子节点后面
+
+     `parent.insertBefore(newNode, referenceNode)`：把newNode插入到指定元素referenceNode前面
+
+     `element.append()`：添加一个或多个节点和字符串到父元素内的最后
+
+     `element.prepend()`：添加一个或多个节点和字符串到父元素内的最前面
+
+     > `appendChild` 只能插入节点，`append` 可以插入节点和字符串。
+
+     
+
+  4. **绑定事件**
+
+     `element.addEventListener('click', ()=>{})`：绑定事件处理函数
+
+     
+
+  5. **删除元素**
+
+     `parent.removeChild(child)`：从父元素中移除某个子节点
+
+     `element.remove()`：直接删除自身
+
+     
+
+  6. **克隆元素**
+
+     `element.cloneNode(true/false)`
+
+     - `true`：深拷贝，复制子元素和内容。
+     - `false`：浅拷贝，只复制当前元素本身。
+
+     
+
+  7. **查找元素**
+
+     `document.querySelector(selector)`：返回第一个匹配的元素
+
+     `document.querySelectorAll(selector)`：返回所有匹配元素（NodeList类数组对象）
+
+     `document.getElementById('id')`：根据id获取元素
+
+     `document.getElementsByClassName('className')`：获取类名集合（HTMLCollection类数组对象）
+
+     > 区别：
+     >
+     > `querySelector` / `querySelectorAll` 使用 CSS 选择器，通用性更强
+     >
+     > `getElementById` / `getElementsByClassName` 更快，但功能单一
+
+  
+
+- **概念区分：节点与元素**
+
+  - **节点（Node）**
+
+    DOM 树上的所有对象，包括元素节点、文本节点、注释节点等。
+
+    1. 元素节点（Element Node）：HTML 标签，比如 `<div>`、`<p>`
+    2. 文本节点（Text Node）：标签里的文字，比如 `<p>Hello</p>` 里的 `Hello`
+    3. 注释节点（Comment Node）：HTML 注释 `<!-- comment -->`
+    4. 文档节点（Document Node）：整个 HTML 文档对象 `document`
+
+    
+
+  - **元素（Element）**
+
+    元素是节点的一种（元素节点），专指HTML标签
+
+    > 例如 `<div>Hello</div>` 中：`<div>` 是元素节点，`Hello` 是文本节点
 
 
 
