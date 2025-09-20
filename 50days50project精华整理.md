@@ -585,7 +585,8 @@
 
 ### **Day9 Sound Board 音板**
 
-
+- const btn = document.createElement('button')
+- document.querySelector('#buttons').appendChild(btn)
 
 
 
