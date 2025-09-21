@@ -1,0 +1,94 @@
+body{
+  background-color: #f0f0f0;
+}
+
+h1{
+  margin: 50px 0 30px;
+  text-align: center;
+}
+
+.faq-container{
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.faq{
+  background-color: transparent;
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 15px 60px 15px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s linear;
+}
+
+.faq.active{
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px 60px 15px 110px;
+  z-index: 1;
+}
+
+.faq.active::before,
+.faq.active::after{
+  content: url('./chat1.svg');
+  position: absolute;
+  top: -0px;
+  left: -10px;
+  z-index: -1;
+}
+.faq.active::before{
+  content: url('./chat2.svg');
+  top: -18px;
+  left: -55px;
+  transform: rotateY(180deg);
+  z-index: -1;
+}
+
+.faq-title{
+  color: #000;
+  font-size: 20px;
+}
+
+.faq-text{
+  display: none;
+  margin-top: 10px;
+  color: #000;
+  font-size: 16px;
+}
+.faq.active .faq-text{
+  display: block;
+}
+
+.faq-toggle{
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  top: 16px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faq-toggle:focus{
+  outline: none;
+}
+
+.faq-toggle .fas-close{
+  display: none;
+}
+
+.faq.active .faq-toggle .fas-close{
+  display: block;
+}
+
+.faq.active .faq-toggle .fas-down{
+  display: none;
+}
