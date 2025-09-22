@@ -740,9 +740,80 @@
 
 ### **Day11 Event Keycodes 键盘事件**
 
-- display: inline-flex;
+- **`display`属性**
 
-  其他display
+  `display`决定了元素应该如何在页面上呈现
+
+  1. **`display: block` (块级元素)**
+
+     - 特点:
+       - 独占一行，会自动换行。
+       - 可以设置 `width`, `height`, `margin` (上下左右), `padding` (上下左右)。
+       - 宽度默认是其父容器的 100%。
+     - 常见标签: `<div>`, `<p>`, `<h1>` - `<h6>`, `<ul>`, `<ol>`, `<li>`, `<form>` 等。
+     - 应用场景: 用于构建页面的主要布局结构，如容器、段落、列表等。
+
+  2. `**display: inline` (行内元素)**
+
+     - 特点:
+       - 不独占一行，多个行内元素会并排显示，直到空间不足才会换行。
+       - **`width` 和 `height` 设置无效。它的宽高由其内容决定。**
+       - **`margin` 只有左右生效，上下无效。**
+       - **`padding` 上下左右都生效，但上下 `padding` 不会推开其他块级元素，只会增加背景区域。**
+     - 常见标签: `<a>`, `<span>`, `<img>`, `<strong>`, `<em>` 等。
+     - 应用场景: 用于包裹文本或小图标，作为段落的一部分。
+
+  3. **`display: inline-block` (行内块元素)**
+
+     - 特点:
+       - 像 `inline` 一样不换行，可以并排。
+       - 像 `block` 一样可以设置 `width`, `height`, `margin`, `padding`。
+     - 应用场景: 完美适用于需要并排显示，同时又要控制大小的场景，如导航栏按钮、商品列表项。
+
+  4. **`display: flex` (弹性盒子布局)**
+
+     - 特点:
+       - 现代布局的首选方案之一，让容器内的子元素可以灵活地伸缩、对齐和分布空间。
+       - 需要配合 `flex-direction`, `justify-content`, `align-items` 等属性一起使用。
+
+     - 应用场景: 几乎所有布局场景，特别是导航栏、卡片列表、垂直居中等。
+
+  5. **`display: grid` (网格布局)**
+
+     - 特点:
+       - 现代布局的另一个强大方案，可以将容器划分为任意数量的行和列，并将子元素放置在精确的网格单元中。
+       - 比 `flex` 更适合处理复杂的大型布局。
+     - 应用场景: 网站整体布局、仪表盘、复杂的表单等。
+
+  6. **`display: none`**
+
+     - 特点:
+       - 元素会从页面上完全消失，不占据任何空间(脱标)。
+       - 与 `visibility: hidden;` 不同，后者只是隐藏元素，但空间依然保留（不脱标）。
+     - 应用场景: 用于动态显示和隐藏元素，例如通过 JavaScript 控制的下拉菜单、弹窗等
+
+     
+
+  7. `display: inline-flex`
+
+     - 可以理解为`inline-block` 和 `flex` 的结合体。
+     - 对外表现 (External Display): 像 `inline-block` 一样。这个元素本身不会独占一行，可以和其他行内元素（如文字、`<span>`）并排显示。
+     - 对内表现 (Internal Display): 像 `flex` 一样。这个元素的所有直接子元素都会进入 Flexbox 布局模式，你可以对它们使用 `justify-content`, `align-items` 等所有 flex 属性。
+
+  8. `display: inline-grid`
+
+     - 可以理解为`inline-block` 和 `grid` 的结合体。
+     - 对外表现: 像 `inline-block` 一样，元素本身不换行，可以和其他行内元素并排显示。
+     - 对内表现: 像 `grid` 一样，元素的所有直接子元素会进入 Grid 布局模式，你可以用 `grid-template-columns` 等 grid 属性来控制它们。
+
+  9. `display: flow-root`
+
+     主要作用是创建一个新的块格式化上下文 (Block Formatting Context, BFC)，用来解决浮动元素导致的高度塌陷问题。
+
+     在以前，为了清除浮动，我们经常需要使用 “clearfix hack” 这种比较取巧的方式。`display: flow-root` 是这个问题的现代、官方解决方案。
+
+     - 解决的问题：当一个容器内的子元素全部设置了 `float`，脱离了文档流，父容器会丢失高度（高度塌陷）。
+     - 如何解决：给父容器设置 `display: flow-root;`，父容器就会创建一个 BFC，这个 BFC 会将内部的浮动子元素“包裹”起来，从而正确地计算自己的高度。
 
 
 
