@@ -887,6 +887,12 @@
 
 ### **Day13 Random Choice Picker 随机选择**
 
+- 定时器
+
+- Math.random
+
+  Math.floor
+
 
 
 
