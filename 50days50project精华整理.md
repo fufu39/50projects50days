@@ -1016,5 +1016,153 @@
 
 ### **Day14 Animated Navigation 导航动画**
 
-- transform
+- **`transform`属性**
+
+  transofrm允许你对元素进行移动、旋转、缩放和倾斜等几何变换，而不会影响页面布局中的其他元素，是动画的首选方案
+
+  - `transform-origin`原点
+
+    在进行变换（尤其是旋转和缩放）时，你需要一个中心点或轴心。`transform-origin` 属性就用来定义这个变换的原点。
+
+    - 默认值: `50% 50%` 或 `center center`，即元素的中心点。
+    - 语法: 可以接受一到三个值，分别代表 X 轴、Y 轴、Z 轴的原点位置。
+    - 常用值: `top`, `bottom`, `left`, `right`, `center`, 或者具体的像素值 `%` 值。
+
+    ```css
+    /* 从左上角开始旋转和缩放 */
+    .element {
+      transform-origin: top left; 
+      /* transform-origin: 0 0; */
+    }
+    ```
+
+  - **2D变换函数**
+
+    2D 变换在 X 轴（水平）和 Y 轴（垂直）的平面上进行
+
+    1. **`translate()`位移**
+
+       用于移动元素。这是实现平滑位移动画的最佳方式，性能远高于修改 `top`/`left` 属性。
+
+       - `translate(tx, ty)`: 水平和垂直方向同时移动。
+       - `translateX(tx)`: 仅水平移动。
+       - `translateY(ty)`: 仅垂直移动。
+
+       ```css
+       .element {
+         /* 向右移动 50px，向下移动 100px */
+         transform: translate(50px, 100px);
+       }
+       .element:hover {
+         /* 仅在X轴上向右移动 20px */
+         transform: translateX(20px);
+       }
+       ```
+
+    2. **`rotate()`旋转**
+
+       用于在 2D 平面上旋转元素。
+
+       - `rotate(angle)`: **顺时针旋转**指定的角度。单位可以是 `deg` (度), `rad` (弧度), `turn` (圈) 等
+
+       ```css
+       .element {
+         /* 顺时针旋转 45 度 */
+         transform: rotate(45deg);
+       }
+       .loading-spinner {
+         /* 旋转一整圈 */
+         transform: rotate(1turn); 
+       }
+       ```
+
+    3. **`scale()`缩放**
+
+       用于放大或缩小元素。
+
+       - `scale(sx, sy)`: 水平和垂直方向同时缩放。
+       - `scaleX(sx)`: 仅水平缩放。
+       - `scaleY(sy)`: 仅垂直缩放。
+       - 值 > 1: 放大，值 < 1: 缩小。
+
+       ```css
+       .element:hover {
+         /* 整体放大 1.2 倍 */
+         transform: scale(1.2);
+       }
+       .element {
+         /* 水平方向放大 2 倍，垂直方向保持不变 */
+         transform: scaleX(2);
+       }
+       ```
+
+    4. `skew()`倾斜：使用较少，略
+
+    
+
+  - **3D变换函数**
+
+    **3D 变换增加了Z轴（垂直于屏幕的深度轴）**，可以创建更丰富的立体效果。X轴方向从左到右，Y轴方向从上到下，Z轴方向垂直于屏幕向外
+
+    关键前提: 要想看到 3D 效果，**通常需要在父容器上设置 perspective 属性，它定义了观察者与 Z=0 平面之间的距离**，创造了景深。
+
+    1. **3D位移、旋转、缩放**
+
+       - `translate3d(tx, ty, tz)`, `translateZ(tz)`: 在三维空间移动。`translateZ` 可以让元素在视觉上靠近或远离观察者。
+       - `scale3d(sx, sy, sz)`, `scaleZ(sz)`: 在三维空间缩放。
+       - `rotate3d(x, y, z, angle)`: 围绕一个自定义的 3D 向量进行旋转。
+       - `rotateX(angle)`: 围绕 X 轴（水平轴）旋转，产生上下翻转的效果。
+       - `rotateY(angle)`: 围绕 Y 轴（垂直轴）旋转，产生左右翻转（旋转门）的效果。
+       - `rotateZ(angle)`: 围绕 Z 轴旋转，效果与 2D 的 `rotate()` 相同。
+
+       示例：
+
+       ```css
+       <div class="scene">
+         <div class="card">
+           <div class="card-face front">正面</div>
+           <div class="card-face back">反面</div>
+         </div>
+       </div>
+       .scene {
+         perspective: 600px;
+       }
+       .card {
+         position: relative;
+         width: 200px;
+         height: 150px;
+         transition: transform 1s;
+         transform-style: preserve-3d; /* 允许子元素保持 3D 空间 */
+       }
+       .scene:hover .card {
+         transform: rotateY(180deg);
+       }
+       .card-face {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         backface-visibility: hidden;
+       }
+       .back {
+         transform: rotateY(180deg);
+       }
+       ```
+
+    2. 多个变换应用
+
+       可以在一个 `transform` 属性中应用多个变换函数，用空格隔开。
+
+       顺序非常重要： **变换是按从左到右的顺序依次应用的**
+
+       ```css
+       /* 先旋转45度，再向右移动100px */
+       .element-a
+        {
+         transform: rotate(45deg) translateX(100px); 
+       }
+       /* 先向右移动100px，再旋转45度 */
+       .element-b {
+         transform: translateX(100px) rotate(45deg);
+       }
+       ```
 
