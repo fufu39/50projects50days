@@ -1170,5 +1170,78 @@
 
 ### **Day15 Incrementing Counter 增加计数器**
 
+- **`data-`自定义属性**
+
+  自定义数据属性是一种标准的 HTML 功能，**它允许开发者在 HTML 元素上附加自定义的私有数据**。这些数据不会对元素的表现层（样式）产生任何影响，但可以被 JavaScript 轻松地读取和操作，从而实现丰富的交互效果，同时保持 HTML 和 JavaScript 的低耦合。
+
+  1. 语法：
+
+     语法非常简单，以 `data-` 开头，后面跟着你自定义的属性名。
+
+     - 必须以 `data-` 作为前缀。
+     - 属性名至少包含一个字符。
+     - 属性名不应包含任何大写字母，并且建议使用短横线分隔多个单词，例如 `data-user-id`。
+
+     ```html
+     <div class="counter" data-target="12000"></div>
+     <div class="user-profile" data-user-id="123" data-user-name="Alice"></div>
+     <button class="add-to-cart" data-product-id="p-001" data-price="99.99">添加到购物车</button>
+     ```
+
+  2. 在JS中的用法：
+
+     自定义属性主要在JS内使用，基本不在CSS内使用。在JS中，有下面两种主要的方式来访问这些 `data-*` 属性。
+
+     - **方法一：`getAttribute()` 和 `setAttribute()`**
+
+       传统方法，适合所有html属性
+
+       1. 读取属性值
+       
+         ```js
+       const counter = document.querySelector('.counter');
+       // 使用 getAttribute('属性全名') 来读取
+       const targetValue = counter.getAttribute('data-target');
+       console.log(targetValue);
+         ```
+       
+       2. 设置或修改属性值
+       
+       ```js
+       // 使用setAttribute('属性全名', '新值') 来修改
+       counter.setAttribute('data-target', '15000');
+       ```
+       
+     - **方法二：dataset 属性 (推荐)**
+     
+       `dataset` 是一个更现代、更便捷的 API，专门用来访问 `data-*` 属性。
+     
+       它将所有 `data-*` 属性转换成一个 `DOMStringMap` 对象，还具有命名转换规则：浏览器会自动将短横线命名法的属性名转换为驼峰命名法。
+     
+       - `data-target` → `dataset.target`
+       - `data-user-id` → `dataset.userId`
+       - `data-user-name` → `dataset.userName`
+     
+       1. 读取属性值
+     
+          ```js
+          const counter = document.querySelector('.counter');
+          // 直接通过 dataset.属性名（驼峰式）来访问
+          const targetValue = counter.dataset.target;
+          console.log(targetValue);
+          ```
+       
+       
+         2. 设置或修改属性值
+       
+             ```js
+             // 直接赋值即可
+             counter.dataset.target = '15000'; // 修改
+             counter.dataset.newInfo = 'some-value'; // 新增一个 data-new-info 属性
+             ```
+     
+
+
+
 
 
